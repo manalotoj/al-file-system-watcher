@@ -1,0 +1,36 @@
+{
+  "name": "al-file-system-watcher",
+  "version": "1.0.0",
+  "description": "A process that can be used to watch a directory for files to upload to AwardLetter files API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node ./specs/alfileuploadwatcher-spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manalotoj/al-file-system-watcher.git"
+  },
+  "keywords": [
+    "awardletter",
+    "files",
+    "upload",
+    "watcher",
+    "daemon"
+  ],
+  "author": "John Manaloto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manalotoj/al-file-upload-watcher/issues"
+  },
+  "homepage": "https://github.com/manalotoj/al-file-upload-watcher#readme",
+  "dependencies": {
+    "al-files-service": "^1.0.0",
+    "chokidar": "^1.0.5",
+    "oauth-wrap": "^1.0.2",
+    "promise": "^7.0.4",
+    "winston": "^1.0.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}

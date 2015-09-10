@@ -1,0 +1,18 @@
+{
+	"logging" : {
+		"directory" : "./logs"
+	},
+	"oauthWrapRequest" : {
+		"url":"sts_url",
+		"creds":{"uid":"uid", "pwd":"pwd"},
+		"wrapScope":"wrapscope"
+	},
+	"filesApi" : {
+		"rootUrl" : "rooturl"
+	},
+	"watch" : {
+		"directory" : "./source",
+		"extension" : "json"
+	},
+	"targetDirectory" : "./target"	
+}
