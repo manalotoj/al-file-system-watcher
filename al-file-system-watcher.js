@@ -1,4 +1,4 @@
-// filename: index.js
+// filename: al-file-system-watcher.js
 
 /** 
 * @module al-file-system-watcher 
@@ -64,31 +64,42 @@ function watch(config) {
     var authorization = null;
 
     function upload(path) {
-        // 1. readFile
-        // 2. get auth header
-        // 3. upload file
-
-        // TODO: perform 1 and 2 in parallel
-        readFile(path, 'utf8')
+        readFile(path, 'utf8')            
             .then(function(content) {
+                var jsonObject = null;
+                try {
+                    var jsonObject = JSON.parse(content);
+                } catch (e) {
+                    logger.warn('Invalid JSON detected: ', e);
+                    return;  
+                }
+
                 oauth.getAuthHeader(oauthRequest.url,
                     oauthRequest.creds.uid,
                     oauthRequest.creds.pwd,
                     oauthRequest.wrapScope)
                     .then(function(authorization) {
-                        filesService.upload(rootUrl, authorization, content)
+                        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+                        filesService.upload(rootUrl, authorization, jsonObject)
                             .then(function(result) { 
                                 logger.debug('upload succeeded: ', result); 
-                            })                        
-                    });
+                            })
+                            .catch(function(error) {
+                                logger.warn('error uploading file: ', error);
+                            });
+                    })
+                    .catch(function(error) {                        
+                        logger.warn('error requesting authorization: ', error.stack);
+                    });                    
             })
-            .catch(function(error) {logger.warn('something went wrong: ', error)} );
+            .catch(function(error) {
+                logger.warn('error reading file: ', error.stack);
+            });
     }
 
     watcher
         .on('add', function(path) 
         {
-            logger.debug('file added');
             if (pathModule.extname(path) === '.' + watchConfig.extension) {
             	try {            		
                     upload(path);
@@ -99,7 +110,6 @@ function watch(config) {
         		}
             }
         }) 
-
         .on('error', function(error) {
             logger.warn('chokidar error occurred: ', error);
         })

@@ -34,11 +34,14 @@ logger = new( winston.Logger )( {
 			maxsize: 1024 * 1024 * 10 // 10MB
 		} )
     ],
+    handleExceptions: true,
 	exceptionHandlers: [
 		new winston.transports.File( {
-			filename: '/al_errors.log'
+			filename: logDir + '/al_errors.log',
+			maxsize: 1024 * 1024 * 10 // 10MB
 		} )
     ]
 } );
+logger.exitOnError = false;
 
 module.exports = logger;

@@ -4,8 +4,8 @@
 	},
 	"oauthWrapRequest" : {
 		"url":"sts_url",
-		"creds":{"uid":"uid", "pwd":"pwd"},
-		"wrapScope":"wrapscope"
+		"creds":{"uid":"userid", "pwd":"password"},
+		"wrapScope":"scope"
 	},
 	"filesApi" : {
 		"rootUrl" : "rooturl"
