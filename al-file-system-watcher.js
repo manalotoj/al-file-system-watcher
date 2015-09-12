@@ -14,12 +14,12 @@
 *   watched extension. Once the file has been copied in full, rename the extension to the watched
 *   extension.
 *
-*   Environment Requirements:
+*   #Environment Requirements:
 *
 *   - SSL access to the public internet over port 5443.
 *   - Node.js installed.
 *
-*   Installing directly from github:
+*   #Installing directly from github:
 *
 *   - Clone or download as zip to local machine. For the later, unzip to desired location.
 *   - Install the following dependencies via npm (npm install [module-name]):
@@ -29,7 +29,7 @@
 *       - al-files-service
         - promise
 *
-*   Running al-file-system-watcher:
+*   #Running al-file-system-watcher:
 */
 
 'use strict';
@@ -66,11 +66,13 @@ function watch(config) {
     function upload(path) {
         readFile(path, 'utf8')            
             .then(function(content) {
-                var jsonObject = null;
+                var contentObject = content;
                 try {
-                    var jsonObject = JSON.parse(content);
-                } catch (e) {
-                    logger.warn('Invalid JSON detected: ', e);
+                    if (watchConfig.fileFormat === 'json') {
+                        var contentObject = JSON.parse(content);
+                    }
+                } catch (error) {
+                    logger.warn('Invalid JSON detected: ', error.stack);
                     return;  
                 }
 
@@ -80,12 +82,12 @@ function watch(config) {
                     oauthRequest.wrapScope)
                     .then(function(authorization) {
                         process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-                        filesService.upload(rootUrl, authorization, jsonObject)
+                        filesService.upload(rootUrl, authorization, contentObject)
                             .then(function(result) { 
                                 logger.debug('upload succeeded: ', result); 
                             })
                             .catch(function(error) {
-                                logger.warn('error uploading file: ', error);
+                                logger.warn('error uploading file: ', error.stack);
                             });
                     })
                     .catch(function(error) {                        
@@ -104,14 +106,14 @@ function watch(config) {
             	try {            		
                     upload(path);
                     logger.debug('file ext match', path);
-        		} catch (exc) {
-        			logger.warn(exc);
+        		} catch (error) {
+        			logger.warn(error.stack);
                     return;
         		}
             }
         }) 
         .on('error', function(error) {
-            logger.warn('chokidar error occurred: ', error);
+            logger.warn('chokidar error occurred: ', error.stack);
         })
 };
 

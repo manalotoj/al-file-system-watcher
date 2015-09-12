@@ -12,7 +12,8 @@
 	},
 	"watch" : {
 		"directory" : "./source",
-		"extension" : "json"
+		"extension" : "json",
+		"fileFormat" : "txt"
 	},
 	"targetDirectory" : "./target"	
 }
