@@ -35,7 +35,7 @@ logger = new( winston.Logger )( {
     handleExceptions: true,
 	exceptionHandlers: [
 		new winston.transports.File( {
-			filename: logDir + '/al_errors.log',
+			filename: logDir + '/alfilesystemwatchererrors.log',
 			maxsize: 1024 * 1024 * 10 // 10MB
 		} )
     ]
