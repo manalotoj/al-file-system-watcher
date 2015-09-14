@@ -35,26 +35,41 @@
 *Standard log entries will be written to a file named alfilesystemwatcher.log while unhandled exceptions will
 *be logged to a file named alfilesystemwatchererrors.log.
 *
-*'  "logging" : { "directory" : "./logs" }
+*       "logging" : { "directory" : "./logs" }
 *
 ***Authorization:** The upload process requires an authorization token from a secure token service(STS).
 *
-*'  "oauthWrapRequest" : { "url":"sts_url", "creds":{"uid":"userid", "pwd":"password"}, "wrapScope":"scope" }
+*       "oauthWrapRequest" : { "url":"sts_url", "creds":{"uid":"userid", "pwd":"password"}, "wrapScope":"scope" }
 *
 *The following values must be provided in order to invoke the STS and acquire an authorization token:
 *
 *JSON Element | Description
 *-------------|--------------------------------------------------------------------------
-*url | The STS url
+*url | The STS URL
 *creds.userid | User Id
 *creds.pwd | User password
 *wrapScope | The resource that will be accessed using the authorization token.
+*
+***AwardLetter Files API:** Defines the root URL of the AwardLetter Files API. This API defines a method
+*for uploading AwardLetter input file content.
+*
+*       "filesApi" : { "rootUrl" : "root_url" }
+*
+***Watch Settings:** Defines the directory to be watched, the file extension to look for, as well as the
+*expected file format/extension.
+*
+*       "watch" : { "directory" : "./source", "extension" : "json", "fileFormat" : "txt" }
 *
 *###Running alfilesystemwatcher:
 *
 *From the alfilesystemwatcher root directory, execute the following in a command prompt:
 *
-*   node alfilesystemwatcher.js
+*       node alfilesystemwatcher.js
+*
+*Alternatively, alfilesystemwatcher can be run as a daemon process using the nodejs forever module. 
+*
+** Install forever by executing "npm install forever -g" in a command prompt.
+** Run alfilesystemwatcher using forever by executing "forever start alfilesystemwatcher.js" in a command prompt.
 *
 ****
 */

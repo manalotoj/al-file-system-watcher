@@ -14,6 +14,5 @@
 		"directory" : "./source",
 		"extension" : "json",
 		"fileFormat" : "txt"
-	},
-	"targetDirectory" : "./target"	
+	}
 }
