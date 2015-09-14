@@ -1,9 +1,6 @@
-// filename: al-file-system-watcher.js
-
 /** 
-* @module al-file-system-watcher 
-* @description Supports a method to watch a particular directory for files with a particular extension.
-*   Any files that are added will be automatically read and uploaded to AwardLetter files API.
+*   @module alfilesystemwatcher
+*   @description Supports a method to watch a particular directory for files with a particular extension.                 Any files that are added will be automatically read and uploaded to AwardLetter files API.
 *
 *   By default, activity is logged to a file within ./logs/alfilesystemwatcher.log using
 *   nodejs winston module. This can be modified to log to numerous sources including a
@@ -16,20 +13,24 @@
 *
 *   #Environment Requirements:
 *
-*   - SSL access to the public internet over port 5443.
-*   - Node.js installed.
+*       * SSL access to the public internet over port 5443.
+*       * Node.js installed.
 *
 *   #Installing directly from github:
 *
-*   - Clone or download as zip to local machine. For the later, unzip to desired location.
-*   - Install the following dependencies via npm (npm install [module-name]):
+*   Clone or download as zip to local machine. For the later, unzip to desired location.
+*   Install the following dependencies via npm (npm install [module-name]):
 *       - chokidar
 *       - winston
 *       - oath-wrap
 *       - al-files-service
-        - promise
+*       - promise
 *
-*   #Running al-file-system-watcher:
+*   #Running alfilesystemwatcher:
+*
+*   From the alfliesystemwatcher root directory, execute the following in a command prompt:
+*
+*       node alfilesystemwatcher.js
 */
 
 'use strict';
