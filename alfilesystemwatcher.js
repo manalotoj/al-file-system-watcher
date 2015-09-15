@@ -1,5 +1,5 @@
 /** 
-*@module alfilesystemwatcher
+*@module al-file-system-watcher
 *@description Supports a method to watch a particular directory for files with a particular extension.                 Any files that are added will be automatically read and uploaded to AwardLetter files API.
 *
 *By default, activity is logged to a file within ./logs/alfilesystemwatcher.log using
